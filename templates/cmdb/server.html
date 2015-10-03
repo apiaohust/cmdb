@@ -1,0 +1,19 @@
+{% extends 'cmdb/base.html' %}
+{% load staticfiles %}
+{% block titile  %} {% endblock %}
+
+{% block body_block %}
+
+        <strong>{{ boldmessage }}</strong>
+
+        </br>
+        {% if serverlist %}
+
+                {%  for server in serverlist %}
+                    <li>{{ server.id }}</li>
+                    <a href="/cmdb/cm_os/{{ server.id }}/add_os/" >add os</a>
+                {% endfor %}
+        {% else %}
+                <strong>no server</strong>
+        {% endif %}
+{% endblock %}

@@ -1,0 +1,10 @@
+       {% if serverlist %}
+            <ul class="nav nav-sidebar">
+                {% for s in serverlist %}
+                    <li><a href="{% url 'server'  %}">{{ s.hardware_num }}</a></li>
+                {% endfor %}
+        {% else %}
+               <li> <strong>no server</strong></li>
+            </ul>
+        {% endif %}
+

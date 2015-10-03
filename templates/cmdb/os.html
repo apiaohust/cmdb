@@ -1,0 +1,17 @@
+{% extends 'cmdb/base.html' %}
+{% load staticfiles %}
+{% block titile  %} {% endblock %}
+{% block body_block %}
+
+        <strong>{{ boldmessage }}</strong>
+        </br>
+        {% if oslist %}
+
+                {%  for os in oslist %}
+                    <li>{{ os.number }}</li>
+                {% endfor %}
+        {% else %}
+                <strong>no os</strong>
+        {% endif %}
+
+{% endblock %}
