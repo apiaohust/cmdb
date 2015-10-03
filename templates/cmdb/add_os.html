@@ -5,7 +5,7 @@
 {% block body_block %}
     <h1>add os</h1>
     {% if not server %}
-        noserver
+        noserver33
     {% else %}
     <form id="os_form" method="post" action="/cmdb/cm_os/{{ server.id }}/add_os/">
         {% csrf_token %}
