@@ -1,7 +1,9 @@
        {% if serverlist %}
             <ul class="nav nav-sidebar">
                 {% for s in serverlist %}
-                    <li><a href="{% url 'server'  %}">{{ s.hardware_num }}</a></li>
+                    <tr>
+                    <td><li><a href="{% url 'server'  %}">{{ s.hardware_num }}</a></li><td>
+                    </tr>
                 {% endfor %}
         {% else %}
                <li> <strong>no server</strong></li>
