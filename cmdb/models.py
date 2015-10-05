@@ -30,8 +30,6 @@ class CM_SERVER(models.Model):
     status = models.CharField(max_length=50,blank=True) #服务器状态
     ex_store =  models.CharField(max_length=50,blank=True)#外连存储
     ex_miya =  models.CharField(max_length=50,blank=True)#外连密押
-    def __unicode__(self):
-        return self.id
 #操作系统
 class CM_OS(models.Model):
     id = models.AutoField(primary_key=True,blank=True) #自增主键

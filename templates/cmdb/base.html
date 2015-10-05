@@ -47,11 +47,14 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
-                {% block side_block %}
-                {% load cmdb_extras %}
-                {% get_server_list %}
-                {% endblock %}
-
+{#                {% block side_block %}#}
+{#                {% load cmdb_extras %}#}
+{#                {% get_server_list %}#}
+{#                {% endblock %}#}
+            <ul>
+                <li><a href="{% url 'server' %}">服务器</a></li>
+                <li><a href="{% url 'server' %}">os</a></li>
+            </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
            <div>
@@ -68,8 +71,6 @@
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="/static/js/bootstrap.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="/static/js/ie10-viewport-bug-workaround.js"></script>
