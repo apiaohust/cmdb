@@ -4,8 +4,8 @@ from cmdb.models import CM_SERVER
 from cmdb.models import CM_OS
 from cmdb.forms import OSForm
 from cmdb.forms import ServerForm
-
-
+from django.core import serializers
+import  json
 
 def index(request):
     os_list = CM_OS.objects.all()
@@ -42,7 +42,7 @@ def add_os(request, serverid):
         server = CM_SERVER.objects.get(id=serverid)
     except CM_SERVER.DoesNotExist:
         server = None
-
+    context_dict ={}
     if request.method == 'POST':
         form = OSForm(request.POST)
         if form.is_valid():
@@ -60,6 +60,18 @@ def add_os(request, serverid):
 
     return render(request,'cmdb/add_os.html', context_dict)
 
+
+def get_json(request):
+    serverlist = CM_SERVER.objects.all()
+    result = serializers.serialize("json",serverlist)
+    templist = json.loads(result)
+    #print serverlist
+    dict ={}
+    dict["data"] =templist
+    print dict
+
+    result = json.dumps(dict)
+    return  HttpResponse(result, content_type="application/json")
 
 
 

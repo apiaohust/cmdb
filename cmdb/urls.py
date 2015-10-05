@@ -9,5 +9,6 @@ urlpatterns = patterns('',
      url(r'^cm_os/$', views.cm_os, name='cm_os'),
      url(r'^add_server/$',views.add_server,name='add_server'),
      url(r'^server/$', views.server, name='server'),
+     url(r'^list/$',views.get_json, name='list'),
 
 )

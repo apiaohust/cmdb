@@ -1,5 +1,5 @@
-__author__ = 'lenovo'
 #coding:utf-8
+__author__ = 'lenovo'
 from django import forms
 import datetime
 from cmdb.models import CM_SERVER,CM_OS
