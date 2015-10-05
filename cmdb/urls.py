@@ -1,4 +1,3 @@
-#utf-8
 __author__ = 'lenovo'
 
 from django.conf.urls import patterns, include, url
@@ -13,4 +12,5 @@ urlpatterns = patterns('',
      url(r'^get_json/$', views.get_json, name='get_json'),
      url(r'^test/$', views.test, name='test'),
      url(r'^server_remove/$', views.server_remove, name='server_remove'),
+
 )
