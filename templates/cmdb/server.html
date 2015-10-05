@@ -24,6 +24,7 @@
 		iconCls: 'icon-add',
         text:'add',
 		handler: function(){
+
             window.location.href="/cmdb/add_server"
 
         }
@@ -33,8 +34,10 @@
 		handler: function(){
             alert("22222");
             var row = $('#dg').datagrid('getSelected');
-            alert("3333");
-            alert(row.price);
+            alert("6666");
+            edit_url ="/cmdb/add_server?id="+row.id;
+            alert(edit_url);
+            window.location.href=edit_url;
         }
 	},'-',{
 		iconCls: 'icon-remove',
@@ -97,52 +100,5 @@
     {% csrf_token %}
   <table id="dg"></table>
 {% endblock %}
-
-
-<script>
-    $(function(){
-	$('#dg').datagrid({
-        method:"psot",
-    //url:'/static/jquery-easyui-1.3.5/demo/datagrid/datagrid_data1.json',
-    url:'/cmdb/get_json/',
-    pageSize:10,
-    pageList:[10,20,30,40,50],
-    pageNumber:1,
-    pagination:true,
-    columns:[[
-        {field:'hardware_num',title:'hardware_num',width:100},
-        {field:'architecture',title:'architecture',width:100},
-        {field:'version',title:'version',width:100,align:'right'}
-      ]],
-     toolbar: [{
-		iconCls: 'icon-add',
-        text:'add',
-		handler: function(){
-            window.location.href="/cmdb/add_server"
-
-        }
-	},'-',{
-		iconCls: 'icon-edit',
-        text:'edit',
-		handler: function(){
-            alert("22222");
-            var row = $('#dg').datagrid('getSelected');
-            alert("3333");
-            alert(row.price);
-        }
-	},'-',{
-		iconCls: 'icon-remove',
-        text:'remove',
-		handler: function(){
-            var row = $('#dg').datagrid('getSelected');
-        }
-	}
-
-     ]
-
-
-    });
-})
-
 
 
