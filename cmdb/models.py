@@ -1,6 +1,6 @@
 #coding:utf-8
 from django.db import models
-import datetime
+
 ## 服务器
 class CM_SERVER(models.Model):
     id = models.AutoField(primary_key=True) #自增id
@@ -30,7 +30,8 @@ class CM_SERVER(models.Model):
     status = models.CharField(max_length=50,blank=True) #服务器状态
     ex_store =  models.CharField(max_length=50,blank=True)#外连存储
     ex_miya =  models.CharField(max_length=50,blank=True)#外连密押
-
+    def __unicode__(self):
+        return self.id
 #操作系统
 class CM_OS(models.Model):
     id = models.AutoField(primary_key=True,blank=True) #自增主键
@@ -41,7 +42,8 @@ class CM_OS(models.Model):
     create_time = models.DateField() #安装时间
     disk_content = models.IntegerField() #磁盘空间
     memory = models.IntegerField() #内存
-
+    def __unicode__(self):
+        return  self.id
 
 ##应用系统
 class CM_APP(models.Model):
@@ -62,6 +64,8 @@ class CM_APP(models.Model):
     is_opensource = models.CharField(max_length=70, blank=True) # 源码是否开放
     RTO = models.CharField(max_length=70, blank=True)
     RPO = models.CharField(max_length=70, blank=True)
+    def __unicode__(self):
+        return self.apply_num
 
 ##虚拟集群
 
@@ -76,7 +80,8 @@ class CM_VCLUSTER(models.Model):
     #TODO
     server = models.CharField(max_length=70, blank=True) #外键关联服务器
     create_time = models.DateField() #创建时间
-
+    def __unicode__(self):
+        return self.id
 
 ##中间件
 class CM_MIDWARE(models.Model):
@@ -96,7 +101,8 @@ class CM_MIDWARE(models.Model):
     create_time = models.CharField(max_length=70, blank=True) #安装时间
     jvm_detail = models.CharField(max_length=70, blank=True) #jvm配制
     jdbc_detail = models.CharField(max_length=70, blank=True) #jdbc配制
-
+    def __unicode__(self):
+        return self.custom_name
 
 
 ##公共平台
@@ -112,6 +118,8 @@ class CM_PUBPLATFORM(models.Model):
     server = models.CharField(max_length=70, blank=True) #外键关联服务器
     create_time = models.DateField() #创建时间
 
+    def __unicode__(self):
+        return self.soft_num
 #数据库
 class CM_DATABASE(models.Model):
     id = models.AutoField(primary_key=True) #自增主键
@@ -132,3 +140,5 @@ class CM_DATABASE(models.Model):
     HA = models.CharField(max_length=70, blank=True) #高可用类型
     datasych_type = models.CharField(max_length=70, blank=True) #数据同步方式
     data_space = models.IntegerField() #表空间
+    def __unicode__(self):
+        return self.solf_num
