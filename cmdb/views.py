@@ -4,7 +4,7 @@ from cmdb.models import CM_SERVER
 from cmdb.models import CM_OS
 from cmdb.forms import OSForm
 from cmdb.forms import ServerForm
-
+from cmdb.forms import ServerForm
 
 
 def index(request):
