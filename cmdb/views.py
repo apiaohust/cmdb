@@ -65,7 +65,13 @@ def cm_os(request):
     context_dict  = {'oslist':os_list}
     return render(request,'cmdb/os.html', context_dict )
 
+#add_server
 def add_server(request):
+    print 1
+    print request.POST
+    print 2
+    print request.GET["id"]
+    print 3
     if request.method == 'POST':
         form = ServerForm(request.POST)
         if form.is_valid():
@@ -76,6 +82,9 @@ def add_server(request):
     else:
         form = ServerForm()
     return render(request,'cmdb/add_server.html',{'form':form})
+
+
+
 
 def add_os(request, serverid):
     try:
