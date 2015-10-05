@@ -6,11 +6,13 @@ from cmdb.models import CM_OS
 from cmdb.forms import OSForm
 from cmdb.forms import ServerForm
 import json
+import dateutil
 from django.core import serializers
 from django.shortcuts import render_to_response
 from collections import defaultdict
 from collections import OrderedDict
 from django.template import RequestContext
+from django.core.serializers.json import DjangoJSONEncoder
 
 
 
@@ -51,8 +53,9 @@ def get_json(request):
     #print result1
     #templist = json.loads(result1)
     cc = {"tatal":server_total,"rows":aa}
-    result = json.dumps(cc)
+    result = json.dumps(cc,cls=DjangoJSONEncoder)
     return  HttpResponse(result,content_type="application/json")
+
 
 
 
