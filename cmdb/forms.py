@@ -5,6 +5,7 @@ import datetime
 from cmdb.models import CM_SERVER,CM_OS,CM_DATABASE
 from django.forms.widgets import Widget, Select, MultiWidget
 from django.forms.extras.widgets import SelectDateWidget
+from django.contrib.auth.models import User
 
 
 class OSForm(forms.ModelForm):
@@ -42,3 +43,10 @@ class DatabaseForm(forms.ModelForm):
     class Meta:
        model = CM_DATABASE
        fields = ('soft_num','custom_name','database_type','database_version','application','id')
+
+class UserForm(forms.ModelForm):
+    password = forms.CharField(widget=forms.PasswordInput())
+
+    class Meta:
+        model = User
+        fields = ('username', 'email', 'password')

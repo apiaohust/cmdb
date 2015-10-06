@@ -72,7 +72,7 @@ DATABASES = {
 # Internationalization
 # https://docs.djangoproject.com/en/1.7/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'en-zh'
 
 TIME_ZONE = 'UTC'
 
@@ -100,3 +100,7 @@ TEMPLATE_PATH = os.path.join(BASE_DIR, 'templates')
 MEDIA_URL = '/media/'
 
 MEDIA_ROOT =  os.path.join(BASE_DIR, 'media')
+
+
+DEFAULT_CHARSET='utf-8'
+LOGIN_URL = '/cmdb/login/'

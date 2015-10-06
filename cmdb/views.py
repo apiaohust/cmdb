@@ -6,6 +6,7 @@ from cmdb.forms import OSForm,ServerForm,DatabaseForm
 import json
 from django.core import serializers
 from django.core.serializers.json import DjangoJSONEncoder
+from django.contrib.auth.decorators import login_required
 
 '''
     样例：增删查改--以服务器管理为例
@@ -227,6 +228,7 @@ def add_db(request):
         form = ServerForm()
     return render(request,'cmdb/add_server.html',{'form':form})
 #返回到server.xml
+@login_required
 def server(request):
     server_list = CM_SERVER.objects.all()
     result = serializers.serialize("json", server_list)
@@ -335,7 +337,4 @@ def add_os(request, serverid):
         context_dict = {'form':form,'server':server}
     return render(request,'cmdb/add_os.html', context_dict)
 '''
-
-
-
 
