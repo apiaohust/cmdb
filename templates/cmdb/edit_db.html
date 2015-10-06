@@ -3,8 +3,8 @@
 {% block titile  %} {% endblock %}
 
 {% block body_block %}
-    <h1>add os</h1>
-    <form id="os_form" method="post" action="/cmdb/add_os/">
+    <h1>edit db</h1>
+    <form id="os_form" method="post" action="/cmdb/edit_db/">
         {% csrf_token %}
         {% for hidden in form.hidden_fields  %}
             {{ hidden }}
@@ -13,8 +13,8 @@
                {{ field.errors }}
                {{ field.label }}
                {{ field }}
-            <br>
+            </br>
         {% endfor %}
-        <input type="submit" name="submit" value="add os">
+        <input type="submit" name="submit" value="edit db">
     </form>
 {% endblock %}

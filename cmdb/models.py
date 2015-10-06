@@ -4,7 +4,6 @@ from django.db import models
 ## 服务器
 class CM_SERVER(models.Model):
     id = models.AutoField(primary_key=True) #自增id
-    pub_platform = models.ForeignKey('CM_PUBPLATFORM') #外键关联公共平台 n:1
     hardware_num = models.CharField(max_length=50,blank=True ) #硬件编号
     architecture = models.CharField(max_length=50,blank=True) #架构类型
     version = models.CharField(max_length=50,blank=True)  #版本
@@ -22,7 +21,6 @@ class CM_SERVER(models.Model):
     buy_time = models.DateField() #入库时间
     set_time = models.DateField() #安装时间
     monitor = models.CharField(max_length=100,blank=True) #监控名称
-    #TODO
     datebase = models.IntegerField()
     #TODO
     midleware = models.IntegerField()
@@ -30,8 +28,7 @@ class CM_SERVER(models.Model):
     status = models.CharField(max_length=50,blank=True) #服务器状态
     ex_store =  models.CharField(max_length=50,blank=True)#外连存储
     ex_miya =  models.CharField(max_length=50,blank=True)#外连密押
-    def __unicode__(self):
-        return self.id
+
 #操作系统
 class CM_OS(models.Model):
     id = models.AutoField(primary_key=True,blank=True) #自增主键
@@ -142,3 +139,32 @@ class CM_DATABASE(models.Model):
     data_space = models.IntegerField() #表空间
     def __unicode__(self):
         return self.solf_num
+
+
+class CM_BIGTYPE(models.Model):
+    id = models.AutoField(primary_key=True) #自增主键
+    type_name = models.CharField(max_length=70, blank=True)
+    attribute = models.CharField(max_length=70, blank=True)
+    def __unicode__(self):
+        return self.solf_num
+
+class CM_SMALLTYPE(models.Model):
+    id = models.AutoField(primary_key=True) #自增主键
+    type_name = models.CharField(max_length=70, blank=True)
+    attribute = models.CharField(max_length=70, blank=True)
+    def __unicode__(self):
+        return self.solf_num
+
+class CM_REL_BIG_SMALL(models.Model):
+    id = models.AutoField(primary_key=True) #自增主键
+    bigtype_id = models.IntegerField()
+    smalltye_id = models.IntegerField()
+    def __unicode__(self):
+        return self.solf_num
+
+class CM_REL_SERVER_MIDWARE(models.Model):
+    id = models.AutoField(primary_key=True) #自增主键
+    server_id = models.IntegerField()
+    midware_id = models.IntegerField()
+
+

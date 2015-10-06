@@ -2,7 +2,6 @@
 <script src="/static/js/cmdb-ajax.js"></script>
 <link rel="stylesheet" type="text/css" href="/static/jquery-easyui-1.3.5/themes/default/easyui.css">
 <link rel="stylesheet" type="text/css" href="/static/jquery-easyui-1.3.5/themes/icon.css">
-<link rel="stylesheet" type="text/css" href="/static/jquery-easyui-1.3.5/demo.css">
 <script type="text/javascript" src="/static/jquery-easyui-1.3.5/jquery.min.js"></script>
 <script type="text/javascript" src="/static/jquery-easyui-1.3.5/jquery.easyui.min.js"></script>
 <script>
@@ -18,6 +17,26 @@
     columns:[[
         {field:'hardware_num',title:'hardware_num',width:100},
         {field:'architecture',title:'architecture',width:100},
+        {field:'version',title:'version',width:100},
+        {field:'memory',title:'memory',width:100},
+        {field:'cpu_count',title:'cpu_count',width:100},
+        {field:'detail',title:'detail',width:100},
+        {field:'fun_name',title:'fun_name',width:100},
+        {field:'admin_ip',title:'admin_ip',width:100},
+        {field:'server_ip',title:'server_ip',width:100},
+        {field:'net_local',title:'net_local',width:100},
+        {field:'vcluster',title:'vcluster',width:100},
+        {field:'m_room',title:'m_room',width:100},
+        {field:'m_cabinet',title:'m_cabinet',width:100},
+        {field:'m_cabloc',title:'m_cabloc',width:100},
+        {field:'buy_time',title:'buy_time',width:100},
+        {field:'set_time',title:'set_time',width:100},
+        {field:'monitor',title:'monitor',width:100},
+        {field:'datebase',title:'datebase',width:100},
+        {field:'midleware',title:'midleware',width:100, formatter: function(value,row,index) {
+          return "<a href='../get_midware_list?id="+row.id+"'"+">操作系统详情</a>"
+        }
+},
         {field:'version',title:'version',width:100,align:'right'}
       ]],
      toolbar: [{
