@@ -1,4 +1,4 @@
-#utf-8
+#coding:utf-8
 from django.shortcuts import render
 from django.http import HttpResponse
 from cmdb.models import CM_SERVER
@@ -12,66 +12,34 @@ from collections import defaultdict
 from collections import OrderedDict
 from django.template import RequestContext
 
-
-
-
-def index(request):
-    os_list = CM_OS.objects.all()
-    context_dict  = {'oslist':os_list}
-    return render(request,'cmdb/index.html', context_dict )
-
-def server(request):
-    server_list = CM_SERVER.objects.all()
-    result = serializers.serialize("json", server_list)
-    context_dict = {'serverlist':result}
-    return render(request,'cmdb/server.html', context_dict)
-
-def get_json1(request):
-    server_list = CM_SERVER.objectsall()
-    dict = {"row1":"1","total":server_list}
-    result = json.dumps(dict)
-    return render_to_response(request,result, context_instance=RequestContext(request))
-
-
-#server_remove
-def server_remove(request):
-    r_id = request.GET["id"]
-    result = CM_SERVER.objects.get(id=r_id)
-    result.delete()
-    return HttpResponse("delete success")
-
-def get_json(request):
-    serverlist = CM_SERVER.objects.all()
-    server_total = CM_SERVER.objects.count()
-    print  server_total
-    print serverlist.values()
-    aa = list(serverlist.values())
-    #bb = json.loads(aa)
-    #result1 = serializers.serialize("json",serverlist)
-    #print result1
-    #templist = json.loads(result1)
-    cc = {"tatal":server_total,"rows":aa}
-    result = json.dumps(cc)
+'''
+    样例：增删查改--以服务器管理为例
+'''
+'''
+查询-页面server.html
+获取参数：rows 每页行数  page 当前页
+根据当前页，每页大小获取server数据
+返回server.html
+'''
+def query_server(request):
+    #数据转换为int类型
+    rows = int(request.GET["rows"])
+    page = int(request.GET["page"])
+    firstpage = (page-1) * rows
+    lastpage =  page * rows
+    serverlist = CM_SERVER.objects.all()[firstpage:lastpage]  #从数据库查询服务器信息
+    servertotal = CM_SERVER.objects.count()  #返回总行数
+    temp = list(serverlist.values())
+    dict_server = {"total":servertotal,"rows":temp}
+    result = json.dumps(dict_server)
     return  HttpResponse(result,content_type="application/json")
 
-
-
-
-def test(request):
-   return render_to_response("cmdb/server.html")
-
-def cm_os(request):
-    os_list = CM_OS.objects.all()
-    context_dict  = {'oslist':os_list}
-    return render(request,'cmdb/os.html', context_dict )
-
-#add_server
+'''
+    增加-页面add_server.html
+    返回server.html
+'''
+#z增加数据
 def add_server(request):
-    print 1
-    print request.POST
-    print 2
-    print request.GET["id"]
-    print 3
     if request.method == 'POST':
         form = ServerForm(request.POST)
         if form.is_valid():
@@ -82,8 +50,70 @@ def add_server(request):
     else:
         form = ServerForm()
     return render(request,'cmdb/add_server.html',{'form':form})
+#返回到server.xml
+def server(request):
+    server_list = CM_SERVER.objects.all()
+    result = serializers.serialize("json", server_list)
+    context_dict = {'serverlist':result}
+    return render(request,'cmdb/server.html', context_dict)
+
+'''
+    删除
+    页面server.xml
+    参数：id
+    返回 页面server.xml
+'''
+#server_remove
+def remove_server(request):
+    r_id = request.GET["id"]
+    result = CM_SERVER.objects.get(id=r_id)
+    result.delete()
+    return HttpResponse("success")
+'''
+    编辑
+    页面：server.html
+    参数id
+    页面：edit_server.html
+    参数：form
+    返回页面  edit_server.html
+'''
+
+#获取当前行信息
+def get_edit_server(request):
+    r_id = request.GET["id"]
+    result = CM_SERVER.objects.get(id=r_id)
+    form = ServerForm(instance=result)
+    return render(request,'cmdb/edit_server.html',{'form':form})
+
+#update
+def edit_server(request):
+    if request.method == 'POST':
+        r_id = request.POST["id"]
+        server_info = CM_SERVER.objects.get(id=r_id) #获取要更改行
+        form = ServerForm(request.POST, instance=server_info)
+        if form.is_valid():
+            form.save()
+            return server(request)
+        else:
+            print form.errors
+    else:
+        form = ServerForm()
+    return render(request,'cmdb/add_server.html',{'form':form})
+
+'''
+    服务器增删查改结束
+'''
 
 
+def index(request):
+    os_list = CM_OS.objects.all()
+    context_dict  = {'oslist':os_list}
+    return render(request,'cmdb/index.html', context_dict )
+
+def cm_os(request):
+    os_list = CM_OS.objects.all()
+    context_dict  = {'oslist':os_list}
+    return render(request,'cmdb/os.html', context_dict)
 
 
 def add_os(request, serverid):
