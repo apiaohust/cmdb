@@ -8,6 +8,7 @@ from django.forms.extras.widgets import SelectDateWidget
 
 
 class OSForm(forms.ModelForm):
+    id = forms.IntegerField(widget=forms.HiddenInput,initial=0)
     number = forms.CharField(max_length=50, label="编号",help_text="input number")
     type = forms.CharField(max_length=50,label="类型",help_text="input type")
     version = forms.CharField(max_length=50,label="版本",help_text="input version")
