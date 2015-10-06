@@ -121,6 +121,7 @@ class Migration(migrations.Migration):
                 ('version', models.CharField(max_length=50, blank=True)),
                 ('cpu_count', models.IntegerField()),
                 ('memory', models.IntegerField()),
+                ('detail', models.CharField(max_length=700, blank=True)),
                 ('fun_name', models.CharField(max_length=100, blank=True)),
                 ('admin_ip', models.CharField(max_length=100, blank=True)),
                 ('server_ip', models.CharField(max_length=100, blank=True)),
@@ -138,8 +139,7 @@ class Migration(migrations.Migration):
                 ('status', models.CharField(max_length=50, blank=True)),
                 ('ex_store', models.CharField(max_length=50, blank=True)),
                 ('ex_miya', models.CharField(max_length=50, blank=True)),
-                ('detail', models.CharField(max_length=300, blank=True)),
-                ('server', models.ForeignKey(to='cmdb.CM_PUBPLATFORM')),
+                ('pub_platform', models.ForeignKey(to='cmdb.CM_PUBPLATFORM')),
             ],
             options={
             },

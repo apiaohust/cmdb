@@ -16,9 +16,10 @@ class OSForm(forms.ModelForm):
     memory = forms.IntegerField()
     class Meta:
         model = CM_OS
-        fields=('number','type','version','create_time','disk_content','memory')
+        fields=('number','type','version','create_time','disk_content','memory','id')
 
 class ServerForm(forms.ModelForm):
+   id = forms.IntegerField(widget=forms.HiddenInput,initial=0)
    hardware_num = forms.CharField(max_length=50 )
    architecture = forms.CharField(max_length=50)
    version = forms.CharField(max_length=50)
@@ -27,4 +28,4 @@ class ServerForm(forms.ModelForm):
    detail = forms.CharField(max_length=700)
    class Meta:
        model = CM_SERVER
-       fields = ('hardware_num','architecture','version','memory','cpu_count','detail')
+       fields = ('hardware_num','architecture','version','memory','cpu_count','detail','id')
