@@ -1,16 +1,10 @@
 #coding:utf-8
 from django.shortcuts import render
 from django.http import HttpResponse
-from cmdb.models import CM_SERVER
-from cmdb.models import CM_OS
-from cmdb.forms import OSForm
-from cmdb.forms import ServerForm
+from cmdb.models import CM_SERVER,CM_DATABASE,CM_OS
+from cmdb.forms import OSForm,ServerForm,DatabaseForm
 import json
 from django.core import serializers
-from django.shortcuts import render_to_response
-from collections import defaultdict
-from collections import OrderedDict
-from django.template import RequestContext
 from django.core.serializers.json import DjangoJSONEncoder
 
 '''
@@ -123,8 +117,8 @@ def query_os(request):
     oslist = CM_OS.objects.all()[firstpage:lastpage]  #从数据库查询服务器信息
     ostotal = CM_OS.objects.count()  #返回总行数
     temp = list(oslist.values())
-    dict_server = {"total":ostotal,"rows":temp}
-    result = json.dumps(dict_server,cls=DjangoJSONEncoder)
+    dict_os = {"total":ostotal,"rows":temp}
+    result = json.dumps(dict_os,cls=DjangoJSONEncoder)
     return  HttpResponse(result,content_type="application/json")
 
 def os(request):
@@ -153,9 +147,9 @@ def add_os(request):
 
 '''
     删除
-    页面server.xml
+    页面os.xml
     参数：id
-    返回 页面server.xml
+    返回 页面os.xml
 '''
 #server_remove
 def remove_os(request):
@@ -165,11 +159,11 @@ def remove_os(request):
     return HttpResponse("success")
 '''
     编辑
-    页面：server.html
+    页面：os.html
     参数id
-    页面：edit_server.html
+    页面：edit_os.html
     参数：form
-    返回页面  edit_server.html
+    返回页面  edit_os.html
 '''
 
 #获取当前行信息
@@ -193,6 +187,94 @@ def edit_os(request):
     else:
         form = OSForm()
     return render(request,'cmdb/add_os.html',{'form':form})
+
+
+'''
+数据库
+
+查询-页面db.html
+获取参数：rows 每页行数  page 当前页
+根据当前页，每页大小获取数据db
+返回db.html
+'''
+def query_db(request):
+    #数据转换为int类型
+    rows = int(request.GET["rows"])
+    page = int(request.GET["page"])
+    firstpage = (page-1) * rows
+    lastpage =  page * rows
+    dblist = CM_DATABASE.objects.all()[firstpage:lastpage]  #从数据库查询服务器信息
+    dbtotal = CM_DATABASE.objects.count()  #返回总行数
+    temp = list(dblist.values())
+    dict_db = {"total":dbtotal,"rows":temp}
+    result = json.dumps(dict_db,cls=DjangoJSONEncoder)
+    return  HttpResponse(result,content_type="application/json")
+
+'''
+    增加-页面add_db.html
+    返回db.html
+'''
+#z增加数据
+def add_db(request):
+    if request.method == 'POST':
+        form = DatabaseForm(request.POST)
+        if form.is_valid():
+            form.save(commit=True)
+            return add_db(request)
+        else:
+            print form.errors
+    else:
+        form = ServerForm()
+    return render(request,'cmdb/add_server.html',{'form':form})
+#返回到server.xml
+def server(request):
+    server_list = CM_SERVER.objects.all()
+    result = serializers.serialize("json", server_list)
+    context_dict = {'serverlist':result}
+    return render(request,'cmdb/server.html', context_dict)
+
+'''
+    删除
+    页面server.xml
+    参数：id
+    返回 页面server.xml
+'''
+#server_remove
+def remove_server(request):
+    r_id = request.GET["id"]
+    result = CM_SERVER.objects.get(id=r_id)
+    result.delete()
+    return HttpResponse("success")
+'''
+    编辑
+    页面：server.html
+    参数id
+    页面：edit_server.html
+    参数：form
+    返回页面  edit_server.html
+'''
+
+#获取当前行信息
+def get_edit_server(request):
+    r_id = request.GET["id"]
+    result = CM_SERVER.objects.get(id=r_id)
+    form = ServerForm(instance=result)
+    return render(request,'cmdb/edit_server.html',{'form':form})
+
+#update
+def edit_server(request):
+    if request.method == 'POST':
+        r_id = request.POST["id"]
+        server_info = CM_SERVER.objects.get(id=r_id) #获取要更改行
+        form = ServerForm(request.POST, instance=server_info)
+        if form.is_valid():
+            form.save()
+            return server(request)
+        else:
+            print form.errors
+    else:
+        form = ServerForm()
+    return render(request,'cmdb/add_server.html',{'form':form})
 
 
 
