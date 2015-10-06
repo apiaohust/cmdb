@@ -15,4 +15,5 @@ urlpatterns = patterns('',
      url(r'^remove_server/$', views.remove_server, name='remove_server'),#删除服务器
      url(r'^get_edit_server/$', views.get_edit_server, name='get_edit_server'),#获取编辑行信息-服务器
      url(r'^edit_server/$', views.edit_server, name='edit_server'),#更新服务器
+     #操作系统
 )
