@@ -9,14 +9,7 @@
     </div>
     <div class="row placeholders">
         <div class="col-xs-12 col-sm-6 placeholder">
-            <h4>os</h4>
-            {% if oslist %}
-                {%  for os in oslist %}
-                    <li class="list-group">{{ os.type }}</li>
-                {% endfor %}
-            {% else %}
-                <strong>no os</strong>
-            {% endif %}
+
         </div>
     </div>
 {% endblock %}
