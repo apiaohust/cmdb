@@ -34,11 +34,11 @@ class ServerForm(forms.ModelForm):
 
 class DatabaseForm(forms.ModelForm):
     id = forms.IntegerField(widget=forms.HiddenInput,initial=0)
-    soft_num = forms.CharField(max_length=70, blank=True)
-    custom_name = forms.CharField(max_length=70, blank=True)
-    database_type = forms.CharField(max_length=70, blank=True)
-    database_version = forms.CharField(max_length=70, blank=True)
-    application = forms.CharField(max_length=70, blank=True)
+    soft_num = forms.CharField(max_length=70)
+    custom_name = forms.CharField(max_length=70)
+    database_type = forms.CharField(max_length=70)
+    database_version = forms.CharField(max_length=70)
+    application = forms.CharField(max_length=70)
     class Meta:
        model = CM_DATABASE
        fields = ('soft_num','custom_name','database_type','database_version','application','id')
