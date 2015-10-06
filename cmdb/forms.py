@@ -19,7 +19,6 @@ class OSForm(forms.ModelForm):
         fields=('number','type','version','create_time','disk_content','memory')
 
 class ServerForm(forms.ModelForm):
-   id = forms.IntegerField(widget=forms.HiddenInput,initial=0)
    hardware_num = forms.CharField(max_length=50 )
    architecture = forms.CharField(max_length=50)
    version = forms.CharField(max_length=50)

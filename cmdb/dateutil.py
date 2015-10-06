@@ -7,5 +7,4 @@ import sys
 
 if __name__ == '__main__':
     td = datetime.today()
-   # sys.setrecursionlimit(1000000)
     print json.dumps(td,cls=DjangoJSONEncoder)

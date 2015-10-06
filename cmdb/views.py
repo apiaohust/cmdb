@@ -91,9 +91,11 @@ def add_os(request, serverid):
         if form.is_valid():
             if server:
                 cm_os = form.save(commit =False)
+
                 cm_os.server =server
                 cm_os.save()
                 form.save(commit=True)
+                CM_SERVER.save()
                 return index(request)
         else:
             print form.errors
