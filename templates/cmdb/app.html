@@ -6,25 +6,26 @@
 <script type="text/javascript" src="/static/jquery-easyui-1.3.5/jquery.easyui.min.js"></script>
 <script>
     $(function(){
-	$('#os_list').datagrid({
+	$('#app_list').datagrid({
     method:"get",
-    url:'/cmdb/query_os/',
+    url:'/cmdb/query_app/',
     pageSize:10,
     pageList:[10,20,30,40,50],
     pageNumber:1,
     pagination:true,
     singleSelect:true,
     columns:[[
-        {field:'number',title:'number',width:100},
-        {field:'type',title:'type',width:100},
-        {field:'version',title:'version',width:100,align:'right'}
+        {field:'apply_num',title:'apply_num',width:100},
+        {field:'base_info',title:'base_info',width:100},
+        {field:'dev_strategy',title:'dev_strategy',width:100},
+        {field:'system_status',title:'system_status',width:100,align:'right'}
       ]],
      toolbar: [{
 		iconCls: 'icon-add',
         text:'add',
 		handler: function(){
 
-            window.location.href="/cmdb/add_os"
+            window.location.href="/cmdb/add_app"
 
         }
 	},'-',{
@@ -32,9 +33,9 @@
         text:'edit',
 		handler: function(){
 
-            var row = $('#os_list').datagrid('getSelected');
+            var row = $('#app_list').datagrid('getSelected');
 
-            edit_url ="/cmdb/get_edit_os?id="+row.id;
+            edit_url ="/cmdb/get_edit_app?id="+row.id;
 
             window.location.href=edit_url;
         }
@@ -42,11 +43,11 @@
 		iconCls: 'icon-remove',
         text:'remove',
 		handler: function(){
-            var row = $('#os_list').datagrid('getSelected');
+            var row = $('#app_list').datagrid('getSelected');
             var id = row.id;
             $.ajax( {
                 type : "get",
-                url : "/cmdb/remove_os/",
+                url : "/cmdb/remove_app/",
                 data : {"id":id},
                 timeout : 20000,
                 cache : false,
@@ -55,7 +56,7 @@
                        alert("delete success");
                     else
                        alert("delete failed")
-                    $('#os_list').datagrid("reload")
+                    $('#app_list').datagrid("reload")
                     }
             });
 
@@ -71,7 +72,8 @@
 {% block titile  %} {% endblock %}
 {% block body_block %}
 
-  <table id="os_list"></table>
+  <table id="app_list"></table>
+
 {% endblock %}
 
 
