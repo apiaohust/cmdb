@@ -3,6 +3,7 @@ __author__ = 'lenovo'
 
 from django.conf.urls import patterns, include, url
 from cmdb import views
+from cmdb import  authview
 
 urlpatterns = patterns('',
      url(r'^$', views.index, name='index'),
@@ -58,4 +59,8 @@ urlpatterns = patterns('',
      url(r'^remove_pub/$', views.remove_pub, name='remove_pub'),#删除公共平台
      url(r'^get_edit_pub/$', views.get_edit_pub, name='get_edit_pub'),#获取编辑行信息-公共平台
      url(r'^edit_pub/$', views.edit_pub, name='edit_pub'),#更新公共平台
+
+     url(r'^register/$', authview.register, name ='register'),
+     url(r'^login/$', authview.user_login, name ='login'),
+     url(r'^logout/$', authview.user_logout, name='logout'),
 )

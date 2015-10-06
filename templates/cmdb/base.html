@@ -35,11 +35,13 @@
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
                 <li><a href="{% url 'index' %}">Home</a></li>
-                        {% if user.is_authenticated %}
-                        <li><a href="{% url 'cm_os' %}?next=/cmdb/">cm_os</a></li>
-                        <li><a href="{% url 'add_server' %}">add_server</a></li>
-                        <li><a href="{% url 'server' %}">server</a></li>
-                        <li><a href="{% url 'index' %}">index</a></li>
+               {% if user.is_authenticated %}
+                        <li><a href="{% url 'logout' %}">注销</a></li>
+                        {% else %}
+                        <li><a href="{% url 'login' %}">登录</a></li>
+                        <li><a href="{% url 'register' %}">注册</a></li>
+               {% endif %}
+
               </ul>
         </div>
       </div>
@@ -53,9 +55,15 @@
 {#                {% get_server_list %}#}
 {#                {% endblock %}#}
             <ul>
-                {% if user.is_authenticated %}
+                 {% if user.is_authenticated %}
                 <li><a href="{% url 'server' %}">服务器</a></li><br>
-                <li><a href="{% url 'os' %}">操作系统</a></li>
+                <li><a href="{% url 'os' %}">操作系统</a></li><br>
+                <li><a href="{% url 'db' %}">数据库</a></li><br>
+                <li><a href="{% url 'midware' %}">中间件</a></li><br>
+                <li><a href="{% url 'app' %}">应用系统</a></li><br>
+                <li><a href="{% url 'vcluster' %}">虚拟集群</a></li><br>
+                <li><a href="{% url 'pub' %}">公共平台</a></li><br>
+                {% endif %}
             </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">

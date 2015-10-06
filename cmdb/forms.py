@@ -6,7 +6,7 @@ from cmdb.models import CM_SERVER,CM_OS,CM_DATABASE,CM_MIDWARE,CM_APP,CM_VCLUSTE
 from django.forms.widgets import Widget, Select, MultiWidget
 from django.forms.extras.widgets import SelectDateWidget
 from django.contrib.auth.models import User
-
+from django.contrib.auth.models import User
 
 class OSForm(forms.ModelForm):
     id = forms.IntegerField(widget=forms.HiddenInput,initial=0)
@@ -64,3 +64,55 @@ class DatabaseForm(forms.ModelForm):
     class Meta:
        model = CM_DATABASE
        fields = ('soft_num','custom_name','database_type','database_version','application','id')
+
+
+class MidwareForm(forms.ModelForm):
+    id = forms.IntegerField(widget=forms.HiddenInput,initial=0)
+    solf_num = forms.CharField(max_length=70)
+    custom_name = forms.CharField(max_length=70)
+    mid_type = forms.CharField(max_length=70)
+    mid_name = forms.CharField(max_length=70)
+    class Meta:
+       model = CM_MIDWARE
+       fields = ('solf_num','custom_name','mid_type','mid_name','id')
+
+class AppForm(forms.ModelForm):
+    id = forms.IntegerField(widget=forms.HiddenInput,initial=0)
+    apply_num = forms.CharField(max_length=70)
+    base_info = forms.CharField(max_length=100)
+    system_status = forms.CharField(max_length=70)
+    dev_strategy =  forms.CharField(max_length=70)
+    class Meta:
+       model = CM_APP
+       fields = ('apply_num','base_info','system_status','dev_strategy','id')
+
+class VclusterForm(forms.ModelForm):
+    id = forms.IntegerField(widget=forms.HiddenInput,initial=0)
+    hard_num = forms.CharField(max_length=70)
+    cluster_name = forms.CharField(max_length=70)
+    cluster_type =forms.CharField(max_length=70)
+    cluster_solft = forms.CharField(max_length=70)
+    soft_version = forms.CharField(max_length=70)
+    net_local = forms.CharField(max_length=70)
+    class Meta:
+       model = CM_VCLUSTER
+       fields = ('hard_num','cluster_name','cluster_type','cluster_solft','id','soft_version','net_local')
+
+class PubForm(forms.ModelForm):
+    id = forms.IntegerField(widget=forms.HiddenInput,initial=0)
+    soft_num = forms.CharField(max_length=70)
+    cluster_name = forms.CharField(max_length=70)
+    cluster_type = forms.CharField(max_length=70)
+    cluster_soft = forms.CharField(max_length=70)
+    soft_version = forms.CharField(max_length=70)
+    net_local = forms.CharField(max_length=70)
+    class Meta:
+       model = CM_PUBPLATFORM
+       fields = ('soft_num','cluster_name','cluster_type','cluster_soft','id','soft_version','net_local')
+
+class UserForm(forms.ModelForm):
+    password = forms.CharField(widget=forms.PasswordInput())
+
+    class Meta:
+        model = User
+        fields = ('username', 'email', 'password')
