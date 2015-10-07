@@ -1,44 +1,37 @@
-#coding:utf-8
+# coding:utf-8
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
-from cmdb.models import CM_SERVER,CM_DATABASE,CM_OS
-from cmdb.forms import OSForm,ServerForm,DatabaseForm
-import json
-from django.core import serializers
-from django.core.serializers.json import DjangoJSONEncoder
-import django.utils.html
-from cmdb.forms import UserForm
-from django.contrib.auth import authenticate, login,logout
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+
+from cmdb.forms import UserForm
 
 
 def register(request):
-
     registered = False
     result = {}
     if request.method == 'POST':
 
         user_form = UserForm(data=request.POST)
-        if user_form.is_valid() :
+        if user_form.is_valid():
             user = user_form.save()
             user.set_password(user.password)
             user.save()
-            registered =True
+            registered = True
         else:
             print user_form.errors,
 
     else:
         user_form = UserForm()
-        result = {'user_form':user_form, 'registered' : registered}
+        result = {'user_form': user_form, 'registered': registered}
     if registered:
         return HttpResponseRedirect('/cmdb/')
     else:
-        return render(request, 'cmdb/register.html',result)
+        return render(request, 'cmdb/register.html', result)
 
 
 def user_login(request):
-
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
@@ -61,6 +54,7 @@ def user_login(request):
         # No context variables to pass to the template system, hence the
         # blank dictionary object...
         return render(request, 'cmdb/login.html', {})
+
 
 @login_required
 def user_logout(request):
