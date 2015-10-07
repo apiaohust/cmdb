@@ -157,3 +157,7 @@ class CM_DATABASE(models.Model):
 
     def __unicode__(self):
         return self.solf_num
+
+class USER_PROFILE(models.Model):
+    id = models.AutoField(primary_key=True)
+    permission = ( ('read','read'), ('modify','modify'))

@@ -3,7 +3,7 @@ __author__ = 'lenovo'
 
 from django.conf.urls import patterns, url
 from cmdb import views
-from cmdb import authview
+from cmdb import authview,autoviews
 
 urlpatterns = patterns('',
                        url(r'^$', views.index, name='index'),
@@ -63,4 +63,7 @@ urlpatterns = patterns('',
                        url(r'^register/$', authview.register, name='register'),
                        url(r'^login/$', authview.user_login, name='login'),
                        url(r'^logout/$', authview.user_logout, name='logout'),
+
+                       ##自动更新
+                       url(r'^upserver/$', autoviews.updateServer, name='upserver'),
                        )
