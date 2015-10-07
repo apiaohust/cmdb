@@ -17,8 +17,8 @@
             {% csrf_token %}
 
             {{ user_form|as_bootstrap }}
-            {{ profile_form|as_bootstrap }}
-
+            用户类别：<br>
+            <input name="permission" ><br>
             <input type="submit" name="submit" value="Register" />
         </form>
         {% endif %}

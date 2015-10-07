@@ -5,7 +5,7 @@ from django.http import HttpResponseRedirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 
-from cmdb.forms import UserForm, UserProfileForm
+from cmdb.forms import UserForm
 
 
 def register(request):
@@ -14,13 +14,14 @@ def register(request):
     if request.method == 'POST':
 
         user_form = UserForm(data=request.POST)
-        profile_form = UserProfileForm(data=request.POST)
-        if user_form.is_valid() and profile_form.is_valid():
+        permission = request.POST.get("permission")
+        #print permission + "####"
+        if user_form.is_valid():
             user = user_form.save()
             tempusername = user.username
             temppassword =user.password
-            profile = profile_form.save()
-            if profile.permission == 'admin':
+            #profile = profile_form.save()
+            if permission == 'admin':
                user.user_permissions.add(41)
             user.set_password(user.password)
             user.save()
@@ -32,8 +33,8 @@ def register(request):
             return HttpResponse(user_form.errors)
     else:
         user_form = UserForm()
-        profile_form = UserProfileForm()
-        result = {'user_form': user_form,'profile_form':profile_form,  'registered': registered}
+        permission = ""
+        result = {'user_form': user_form,'profile_form':permission,  'registered': registered}
     if registered:
         return HttpResponseRedirect('/cmdb/')
     else:
