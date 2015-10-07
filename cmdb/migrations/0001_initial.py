@@ -36,6 +36,17 @@ class Migration(migrations.Migration):
             bases=(models.Model,),
         ),
         migrations.CreateModel(
+            name='CM_CONFIG',
+            fields=[
+                ('id', models.AutoField(serialize=False, primary_key=True)),
+                ('config_name', models.CharField(max_length=70, blank=True)),
+                ('remark', models.CharField(max_length=100, blank=True)),
+            ],
+            options={
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
             name='CM_DATABASE',
             fields=[
                 ('id', models.AutoField(serialize=False, primary_key=True)),
@@ -113,6 +124,17 @@ class Migration(migrations.Migration):
             bases=(models.Model,),
         ),
         migrations.CreateModel(
+            name='CM_REL_SERVER_MIDWARE',
+            fields=[
+                ('id', models.AutoField(serialize=False, primary_key=True)),
+                ('server_id', models.IntegerField()),
+                ('midware_id', models.IntegerField()),
+            ],
+            options={
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
             name='CM_SERVER',
             fields=[
                 ('id', models.AutoField(serialize=False, primary_key=True)),
@@ -139,7 +161,6 @@ class Migration(migrations.Migration):
                 ('status', models.CharField(max_length=50, blank=True)),
                 ('ex_store', models.CharField(max_length=50, blank=True)),
                 ('ex_miya', models.CharField(max_length=50, blank=True)),
-                ('pub_platform', models.ForeignKey(to='cmdb.CM_PUBPLATFORM')),
             ],
             options={
             },
@@ -157,6 +178,16 @@ class Migration(migrations.Migration):
                 ('net_local', models.CharField(max_length=70, blank=True)),
                 ('server', models.CharField(max_length=70, blank=True)),
                 ('create_time', models.DateField()),
+            ],
+            options={
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='USER_PROFILE',
+            fields=[
+                ('id', models.AutoField(serialize=False, primary_key=True)),
+                ('permission', models.CharField(max_length=50)),
             ],
             options={
             },

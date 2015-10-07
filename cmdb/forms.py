@@ -4,7 +4,7 @@ from django import forms
 from django.forms.extras.widgets import SelectDateWidget
 from django.contrib.auth.models import User
 from bootstrap_toolkit.widgets import BootstrapDateInput, BootstrapTextInput, BootstrapUneditableInput
-from cmdb.models import CM_SERVER, CM_OS, CM_DATABASE, CM_MIDWARE, CM_APP, CM_VCLUSTER, CM_PUBPLATFORM,CM_CONFIG,USER_PROFILE
+from cmdb.models import CM_SERVER, CM_OS, CM_DATABASE, CM_MIDWARE, CM_APP, CM_VCLUSTER, CM_PUBPLATFORM,CM_CONFIG
 
 
 class OSForm(forms.ModelForm):
@@ -167,15 +167,6 @@ class UserForm(forms.ModelForm):
 
 
 # class UserGroupForm (forms.ModelForm):
-
-class UserProfileForm(forms.ModelForm):
-    id = forms.IntegerField(widget=forms.HiddenInput, initial=0)
-    permission = forms.CharField(max_length=50)
-
-    class Meta:
-        model = USER_PROFILE
-        fields ={'permission'}
-
 
 class ConfigForm(forms.ModelForm):
     id = forms.IntegerField(widget=forms.HiddenInput, initial=0)

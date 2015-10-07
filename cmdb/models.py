@@ -154,12 +154,7 @@ class CM_DATABASE(models.Model):
     datasych_type = models.CharField(max_length=70, blank=True)  # 数据同步方式
     data_space = models.IntegerField()  # 表空间
 
-    def __unicode__(self):
-        return self.solf_num
 
-class USER_PROFILE(models.Model):
-    id = models.AutoField(primary_key=True)
-    permission = models.CharField(max_length=50)
 
 class CM_REL_SERVER_MIDWARE(models.Model):
     id = models.AutoField(primary_key=True) #自增主键
