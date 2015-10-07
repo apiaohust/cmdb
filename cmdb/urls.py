@@ -16,7 +16,9 @@ urlpatterns = patterns('',
                        url(r'^remove_server/$', views.remove_server, name='remove_server'),  # 删除服务器
                        url(r'^get_edit_server/$', views.get_edit_server, name='get_edit_server'),  # 获取编辑行信息-服务器
                        url(r'^edit_server/$', views.edit_server, name='edit_server'),  # 更新服务器
-                       url(r'^get_midware_list/$', views.get_midware_list, name='get_midware_list'),  # 更新服务器
+                       url(r'^server_get_midwarelist/$', views.server_get_midwarelist, name='server_get_midwarelist'),  # 更新服务器
+                       url(r'^server_get_midwarelist_html/$', views.server_get_midwarelist_html, name='server_get_midwarelist_html'),  # 更新服务器
+
                        # 操作系统
                        url(r'^query_os/$', views.query_os, name='query_os'),  # 分页查询os
                        url(r'^os/$', views.os, name='os'),  # 全查os信息
@@ -59,6 +61,13 @@ urlpatterns = patterns('',
                        url(r'^remove_pub/$', views.remove_pub, name='remove_pub'),  # 删除公共平台
                        url(r'^get_edit_pub/$', views.get_edit_pub, name='get_edit_pub'),  # 获取编辑行信息-公共平台
                        url(r'^edit_pub/$', views.edit_pub, name='edit_pub'),  # 更新公共平台
+                       #配置项
+                       url(r'^query_config/$', views.query_config, name='query_config'),  # 分页查询配置项
+                       url(r'^config/$', views.config, name='config'),  # 全查配置项信息
+                       url(r'^add_config/$', views.add_config, name='add_config'),  # 添加配置项
+                       url(r'^remove_config/$', views.remove_config, name='remove_config'),  # 删除配置项
+                       url(r'^get_edit_config/$', views.get_edit_config, name='get_edit_config'),  # 获取编辑行信息-配置项
+                       url(r'^edit_config/$', views.edit_config, name='edit_config'),  # 更新配置项
 
                        url(r'^register/$', authview.register, name='register'),
                        url(r'^login/$', authview.user_login, name='login'),

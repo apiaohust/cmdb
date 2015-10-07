@@ -15,29 +15,31 @@
     pagination:true,
     singleSelect:true,
     columns:[[
-        {field:'hardware_num',title:'hardware_num',width:100},
-        {field:'architecture',title:'architecture',width:100},
-        {field:'version',title:'version',width:100},
-        {field:'memory',title:'memory',width:100},
-        {field:'cpu_count',title:'cpu_count',width:100},
-        {field:'detail',title:'detail',width:100},
-        {field:'fun_name',title:'fun_name',width:100},
-        {field:'admin_ip',title:'admin_ip',width:100},
-        {field:'server_ip',title:'server_ip',width:100},
-        {field:'net_local',title:'net_local',width:100},
-        {field:'vcluster',title:'vcluster',width:100},
-        {field:'m_room',title:'m_room',width:100},
-        {field:'m_cabinet',title:'m_cabinet',width:100},
-        {field:'m_cabloc',title:'m_cabloc',width:100},
-        {field:'buy_time',title:'buy_time',width:100},
-        {field:'set_time',title:'set_time',width:100},
-        {field:'monitor',title:'monitor',width:100},
-        {field:'datebase',title:'datebase',width:100},
-        {field:'midleware',title:'midleware',width:100, formatter: function(value,row,index) {
-          return "<a href='../get_midware_list?id="+row.id+"'"+">操作系统详情</a>"
-        }
-},
-        {field:'version',title:'version',width:100,align:'right'}
+        {field:'hardware_num',title:'硬件编号',width:100},
+        {field:'architecture',title:'架构类型',width:100},
+        {field:'version',title:'版本',width:100},
+        {field:'memory',title:'cpu数量',width:100},
+        {field:'cpu_count',title:'内存大小',width:100},
+        {field:'detail',title:'详情',width:100},
+        {field:'midleware',title:'中间件',width:100, formatter: function(value,row,index) {
+            href = "javascript:void(window.open('http://127.0.0.1:8000/cmdb/server_get_midwarelist_html/?id="+row.id+"&rows=10&page=1'),_Blank)";
+
+          url = "<a href="+href+">点击查看中间件</a>";
+            return url;
+          }
+        },
+        {field:'fun_name',title:'功能名称',width:100},
+        {field:'admin_ip',title:'管理ip',width:100},
+        {field:'server_ip',title:'服务ip',width:100},
+        {field:'net_local',title:'网络位置',width:100},
+        {field:'vcluster',title:'所属集群',width:100},
+        {field:'m_room',title:'机房位置',width:100},
+        {field:'m_cabinet',title:'机柜',width:100},
+        {field:'m_cabloc',title:'机柜位',width:100},
+        {field:'buy_time',title:'入库时间',width:100},
+        {field:'set_time',title:'安装时间',width:100},
+        {field:'monitor',title:'监控名称',width:100},
+        {field:'datebase',title:'数据库',width:100,align:'right'}
       ]],
      toolbar: [{
 		iconCls: 'icon-add',
@@ -49,7 +51,7 @@
         }
 	},'-',{
 		iconCls: 'icon-edit',
-        text:'edit',
+        text:'编辑',
 		handler: function(){
 
             var row = $('#server_list').datagrid('getSelected');
@@ -60,7 +62,7 @@
         }
 	},'-',{
 		iconCls: 'icon-remove',
-        text:'remove',
+        text:'删除',
 		handler: function(){
             var row = $('#server_list').datagrid('getSelected');
             var id = row.id;
@@ -92,6 +94,7 @@
 {% block body_block %}
 
   <table id="server_list"></table>
+  <dialog id="dialog"></dialog>
 {% endblock %}
 
 

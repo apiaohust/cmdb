@@ -1,0 +1,20 @@
+{% extends 'cmdb/base.html' %}
+{% load staticfiles %}
+{% block titile  %} {% endblock %}
+
+{% block body_block %}
+    <h1>edit config</h1>
+    <form id="os_form" method="post" action="/cmdb/edit_config/">
+        {% csrf_token %}
+        {% for hidden in form.hidden_fields  %}
+            {{ hidden }}
+        {% endfor %}
+        {% for field in form.visible_fields %}
+               {{ field.errors }}
+               {{ field.label }}
+               {{ field }}
+            </br>
+        {% endfor %}
+        <input type="submit" name="submit" value="edit config">
+    </form>
+{% endblock %}
