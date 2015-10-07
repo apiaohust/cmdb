@@ -160,7 +160,7 @@ class CM_DATABASE(models.Model):
 
 class USER_PROFILE(models.Model):
     id = models.AutoField(primary_key=True)
-    permission = ( ('read','read'), ('modify','modify'))
+    permission = models.CharField(max_length=50)
 
 class CM_REL_SERVER_MIDWARE(models.Model):
     id = models.AutoField(primary_key=True) #自增主键

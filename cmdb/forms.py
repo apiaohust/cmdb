@@ -4,7 +4,7 @@ from django import forms
 from django.forms.extras.widgets import SelectDateWidget
 from django.contrib.auth.models import User
 from bootstrap_toolkit.widgets import BootstrapDateInput, BootstrapTextInput, BootstrapUneditableInput
-from cmdb.models import CM_SERVER, CM_OS, CM_DATABASE, CM_MIDWARE, CM_APP, CM_VCLUSTER, CM_PUBPLATFORM,CM_CONFIG
+from cmdb.models import CM_SERVER, CM_OS, CM_DATABASE, CM_MIDWARE, CM_APP, CM_VCLUSTER, CM_PUBPLATFORM,CM_CONFIG,USER_PROFILE
 
 
 class OSForm(forms.ModelForm):
