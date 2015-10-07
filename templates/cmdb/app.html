@@ -15,14 +15,24 @@
     pagination:true,
     singleSelect:true,
     columns:[[
-        {field:'apply_num',title:'apply_num',width:100},
-        {field:'base_info',title:'base_info',width:100},
-        {field:'dev_strategy',title:'dev_strategy',width:100},
-        {field:'system_status',title:'system_status',width:100,align:'right'}
+        {field:'apply_num',title:'应用编号',width:100},
+        {field:'base_info',title:'基本信息',width:100},
+        {field:'system_status',title:'系统状态',width:100},
+        {field:'dev_strategy',title:'开发策略',width:100},
+        {field:'first_field',title:'一级域',width:100},
+        {field:'second_field',title:'二级域',width:100},
+        {field:'tech_depart',title:'科技部门',width:100},
+        {field:'app_admin',title:'应用负责人',width:100},
+        {field:'yw_depart',title:'业务部门',width:100},
+        {field:'yw_admin',title:'业务负责人',width:100},
+        {field:'op_level',title:'运维等级',width:100},
+        {field:'server_time',title:'服务时间',width:100},
+        {field:'zaibei_status',title:'是否建立灾备',width:100},
+        {field:'is_opensource',title:'源码是否开放',width:100,align:'right'}
       ]],
      toolbar: [{
 		iconCls: 'icon-add',
-        text:'add',
+        text:'新增',
 		handler: function(){
 
             window.location.href="/cmdb/add_app"
@@ -30,7 +40,7 @@
         }
 	},'-',{
 		iconCls: 'icon-edit',
-        text:'edit',
+        text:'编辑',
 		handler: function(){
 
             var row = $('#app_list').datagrid('getSelected');
@@ -41,7 +51,7 @@
         }
 	},'-',{
 		iconCls: 'icon-remove',
-        text:'remove',
+        text:'删除',
 		handler: function(){
             var row = $('#app_list').datagrid('getSelected');
             var id = row.id;

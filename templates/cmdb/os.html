@@ -25,7 +25,7 @@
       ]],
      toolbar: [{
 		iconCls: 'icon-add',
-        text:'add',
+        text:'新增',
 		handler: function(){
 
             window.location.href="/cmdb/add_os"
@@ -33,7 +33,7 @@
         }
 	},'-',{
 		iconCls: 'icon-edit',
-        text:'edit',
+        text:'编辑',
 		handler: function(){
 
             var row = $('#os_list').datagrid('getSelected');
@@ -44,7 +44,7 @@
         }
 	},'-',{
 		iconCls: 'icon-remove',
-        text:'remove',
+        text:'删除',
 		handler: function(){
             var row = $('#os_list').datagrid('getSelected');
             var id = row.id;

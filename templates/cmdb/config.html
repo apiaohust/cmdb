@@ -9,7 +9,7 @@
 	$('#config_list').datagrid({
     method:"get",
     url:'/cmdb/query_config/',
-    pageSize:10,
+    pageSize:20,
     pageList:[10,20,30,40,50],
     pageNumber:1,
     pagination:true,
@@ -20,7 +20,7 @@
       ]],
      toolbar: [{
 		iconCls: 'icon-add',
-        text:'add',
+        text:'新增',
 		handler: function(){
 
             window.location.href="/cmdb/add_config"
@@ -28,7 +28,7 @@
         }
 	},'-',{
 		iconCls: 'icon-edit',
-        text:'edit',
+        text:'编辑',
 		handler: function(){
 
             var row = $('#config_list').datagrid('getSelected');
@@ -39,7 +39,7 @@
         }
 	},'-',{
 		iconCls: 'icon-remove',
-        text:'remove',
+        text:'删除',
 		handler: function(){
             var row = $('#config_list').datagrid('getSelected');
             var id = row.id;

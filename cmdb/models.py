@@ -6,7 +6,6 @@ from django.contrib.auth.models import User
 ## 服务器
 class CM_SERVER(models.Model):
     id = models.AutoField(primary_key=True)  # 自增id
-    pub_platform = models.ForeignKey('CM_PUBPLATFORM')  # 外键关联公共平台 n:1
     hardware_num = models.CharField(max_length=50, blank=True)  # 硬件编号
     architecture = models.CharField(max_length=50, blank=True)  # 架构类型
     version = models.CharField(max_length=50, blank=True)  # 版本

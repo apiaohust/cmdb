@@ -17,14 +17,17 @@
     singleSelect:true,
     columns:[[
         {field:'soft_num',title:'软件编号',width:100},
-        {field:'cluster_name',title:'cluster_name',width:100},
-        {field:'cluster_type',title:'cluster_type',width:100},
-        {field:'cluster_soft',title:'cluster_soft',width:100},
-        {field:'soft_version',title:'soft_version',width:100,align:'right'}
+        {field:'cluster_name',title:'集群名称',width:100},
+        {field:'cluster_type',title:'集群类型',width:100},
+        {field:'cluster_soft',title:'集群软件',width:100},
+        {field:'soft_version',title:'软件版本',width:100},
+        {field:'net_local',title:'网络位置',width:100},
+        {field:'server',title:'外键关联服务器',width:100},
+        {field:'create_time',title:'创建时间',width:100,align:'right'}
       ]],
      toolbar: [{
 		iconCls: 'icon-add',
-        text:'add',
+        text:'新增',
 		handler: function(){
 
             window.location.href="/cmdb/add_pub"
@@ -32,7 +35,7 @@
         }
 	},'-',{
 		iconCls: 'icon-edit',
-        text:'edit',
+        text:'编辑',
 		handler: function(){
 
             var row = $('#pub_list').datagrid('getSelected');
@@ -43,7 +46,7 @@
         }
 	},'-',{
 		iconCls: 'icon-remove',
-        text:'remove',
+        text:'删除',
 		handler: function(){
             var row = $('#pub_list').datagrid('getSelected');
             var id = row.id;

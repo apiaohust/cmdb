@@ -15,13 +15,27 @@
     pagination:true,
     singleSelect:true,
     columns:[[
-        {field:'soft_num',title:'soft_num',width:100},
-        {field:'custom_name',title:'custom_name',width:100},
-        {field:'database_type',title:'database_type',width:100,align:'right'}
+        {field:'soft_num',title:'软件编号',width:100},
+        {field:'custom_name',title:'自定义名称',width:100},
+        {field:'database_type',title:'数据库类型',width:100},
+        {field:'database_version',title:'数据库版本',width:100},
+        {field:'application',title:'归属系统',width:100},
+        {field:'server',title:'服务器',width:100},
+        {field:'cluster_local',title:'所属集群',width:100},
+        {field:'database_name',title:'数据库名称',width:100},
+        {field:'server_ip',title:'服务IP',width:100},
+        {field:'scan_ip',title:'服务器域名',width:100},
+        {field:'schema',title:'schema属性',width:100},
+        {field:'create_time',title:'创建时间',width:100},
+        {field:'max_session',title:'最大会话数',width:100},
+        {field:'HA',title:'高可用类型',width:100},
+        {field:'datasych_type',title:'数据同步方式',width:100},
+        {field:'data_space',title:'表空间',width:100,align:'right'}
+
       ]],
      toolbar: [{
 		iconCls: 'icon-add',
-        text:'add',
+        text:'新增',
 		handler: function(){
 
             window.location.href="/cmdb/add_db"
@@ -29,7 +43,7 @@
         }
 	},'-',{
 		iconCls: 'icon-edit',
-        text:'edit',
+        text:'编辑',
 		handler: function(){
 
             var row = $('#db_list').datagrid('getSelected');
@@ -40,7 +54,7 @@
         }
 	},'-',{
 		iconCls: 'icon-remove',
-        text:'remove',
+        text:'删除',
 		handler: function(){
             var row = $('#db_list').datagrid('getSelected');
             var id = row.id;
