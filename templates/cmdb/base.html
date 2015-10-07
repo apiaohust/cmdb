@@ -56,6 +56,7 @@
             {#                {% endblock %}#}
             <ul>
                 {% if user.is_authenticated %}
+                    <li><a href="{% url 'config' %}">配置项</a></li><br>
                     <li><a href="{% url 'server' %}">服务器</a></li><br>
                     <li><a href="{% url 'os' %}">操作系统</a></li><br>
                     <li><a href="{% url 'db' %}">数据库</a></li><br>

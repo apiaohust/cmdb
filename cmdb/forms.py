@@ -4,8 +4,7 @@ from django import forms
 from django.forms.extras.widgets import SelectDateWidget
 from django.contrib.auth.models import User
 from bootstrap_toolkit.widgets import BootstrapDateInput, BootstrapTextInput, BootstrapUneditableInput
-
-from cmdb.models import CM_SERVER, CM_OS, CM_DATABASE, CM_MIDWARE, CM_APP, CM_VCLUSTER, CM_PUBPLATFORM, USER_PROFILE
+from cmdb.models import CM_SERVER, CM_OS, CM_DATABASE, CM_MIDWARE, CM_APP, CM_VCLUSTER, CM_PUBPLATFORM,CM_CONFIG
 
 
 class OSForm(forms.ModelForm):
@@ -52,11 +51,10 @@ class ServerForm(forms.ModelForm):
     class Meta:
         model = CM_SERVER
         fields = (
-            'hardware_num', 'architecture', 'version', 'memory', 'cpu_count', 'detail', 'id', 'fun_name', 'admin_ip',
-            'server_ip', 'net_local',
-            'vcluster', 'm_room', 'm_cabinet', 'm_cabloc', 'buy_time', 'set_time', 'monitor', 'datebase', 'midleware',
-            'HA',
-            'status', 'ex_store', 'ex_miya')
+        'hardware_num', 'architecture', 'version', 'memory', 'cpu_count', 'detail', 'id', 'fun_name', 'admin_ip',
+        'server_ip', 'net_local',
+        'vcluster', 'm_room', 'm_cabinet', 'm_cabloc', 'buy_time', 'set_time', 'monitor', 'datebase', 'midleware', 'HA',
+        'status', 'ex_store', 'ex_miya')
 
 
 class DatabaseForm(forms.ModelForm):
@@ -141,3 +139,13 @@ class UserProfileForm(forms.ModelForm):
     class Meta:
         model = USER_PROFILE
         fields ={'permission'}
+
+
+class ConfigForm(forms.ModelForm):
+    id = forms.IntegerField(widget=forms.HiddenInput, initial=0)
+    config_name = forms.CharField(max_length=70)
+    remark = forms.CharField(max_length=100)
+    class Meta:
+        model = CM_CONFIG
+        fields = ('config_name', 'remark', 'id')
+

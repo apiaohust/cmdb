@@ -161,3 +161,14 @@ class CM_DATABASE(models.Model):
 class USER_PROFILE(models.Model):
     id = models.AutoField(primary_key=True)
     permission = ( ('read','read'), ('modify','modify'))
+
+class CM_REL_SERVER_MIDWARE(models.Model):
+    id = models.AutoField(primary_key=True) #自增主键
+    server_id = models.IntegerField() #服务器id
+    midware_id = models.IntegerField() #中间件id
+
+class CM_CONFIG(models.Model):
+    id = models.AutoField(primary_key=True) #自增主键
+    config_name = models.CharField(max_length=70, blank=True)  #配置项名称
+    remark = models.CharField(max_length=100, blank=True)  #配置项说明
+

@@ -1,8 +1,8 @@
 # coding:utf-8
 from django.shortcuts import render
 from django.http import HttpResponse
-from cmdb.models import CM_SERVER, CM_DATABASE, CM_OS, CM_MIDWARE, CM_APP, CM_PUBPLATFORM, CM_VCLUSTER
-from cmdb.forms import OSForm, ServerForm, DatabaseForm, MidwareForm, AppForm, PubForm, VclusterForm
+from cmdb.models import CM_SERVER, CM_DATABASE, CM_OS, CM_MIDWARE, CM_APP, CM_PUBPLATFORM, CM_VCLUSTER,CM_REL_SERVER_MIDWARE,CM_CONFIG
+from cmdb.forms import OSForm, ServerForm, DatabaseForm, MidwareForm, AppForm, PubForm, VclusterForm,ConfigForm
 import json
 from django.core import serializers
 from django.core.serializers.json import DjangoJSONEncoder
@@ -56,10 +56,10 @@ def add_server(request):
 # 返回到server.xml
 @login_required
 def server(request):
-    server_list = CM_SERVER.objects.all()
-    result = serializers.serialize("json", server_list)
-    context_dict = {'serverlist': result}
-    return render(request, 'cmdb/server.html', context_dict)
+    # server_list = CM_SERVER.objects.all()
+    # result = serializers.serialize("json", server_list)
+    # context_dict = {'serverlist': result}
+    return render(request, 'cmdb/server.html')
 
 
 '''
@@ -117,13 +117,23 @@ def edit_server(request):
 '''
 
 
-def get_midware_list(request):
-    print request.GET["id"]
-    r_id = int(request.GET["id"])
-    midwarelist = CM_REL_SERVER_MIDWARE.objects.filter(server_id=r_id)
+def server_get_midwarelist_html(request):
+    r_id =request.GET["id"]
+    dict = {"id":r_id}
+    return render(request,"cmdb/server_oslist.html",dict)
 
-    return HttpResponse(r_id)
-
+def server_get_midwarelist(request):
+    server_id = request.GET["server_id"]
+    print server_id
+    temp =  CM_REL_SERVER_MIDWARE.objects.filter(server_id=server_id).values_list("midware_id")
+    midwarelist = CM_MIDWARE.objects.filter(pk__in=temp)
+    # midwarelist = CM_MIDWARE.objects.all() # 从数据库查询服务器信息
+    # midwaretotal = CM_MIDWARE.objects.count()  # 返回总行数
+    midwaretotal = len(midwarelist)
+    temp = list(midwarelist.values())
+    dict_midware = {"total": midwaretotal, "rows": temp}
+    result = json.dumps(dict_midware, cls=DjangoJSONEncoder)
+    return HttpResponse(result, content_type="application/json")
 
 '''
     服务器增删查改结束
@@ -155,10 +165,10 @@ def query_os(request):
 
 
 def os(request):
-    os_list = CM_OS.objects.all()
-    result = serializers.serialize("json", os_list)
-    context_dict = {'oslist': result}
-    return render(request, 'cmdb/os.html', context_dict)
+    # os_list = CM_OS.objects.all()
+    # result = serializers.serialize("json", os_list)
+    # context_dict = {'oslist': result}
+    return render(request, 'cmdb/os.html')
 
 
 '''
@@ -739,6 +749,115 @@ def edit_pub(request):
     else:
         form = PubForm()
     return render(request, 'cmdb/add_pub.html', {'form': form})
+
+
+
+'''
+    配置项
+'''
+
+def query_config(request):
+    # 数据转换为int类型
+    rows = int(request.GET["rows"])
+    page = int(request.GET["page"])
+    firstpage = (page - 1) * rows
+    lastpage = page * rows
+    publist =CM_CONFIG .objects.all()[firstpage:lastpage]  # 从数据库查询服务器信息
+    pubtotal = CM_CONFIG.objects.count()  # 返回总行数
+    temp = list(publist.values())
+    dict_pub = {"total": pubtotal, "rows": temp}
+    result = json.dumps(dict_pub, cls=DjangoJSONEncoder)
+    return HttpResponse(result, content_type="application/json")
+
+
+'''
+    增加-页面add_config.html
+    返回config.html
+'''
+
+
+# z增加数据
+def add_config(request):
+    if request.method == 'POST':
+        form = ConfigForm(request.POST)
+        if form.is_valid():
+            form.save(commit=True)
+            return config(request)
+        else:
+            print form.errors
+    else:
+        form = ConfigForm()
+    return render(request, 'cmdb/add_config.html', {'form': form})
+
+
+# 返回到server.xml
+def config(request):
+    pub_list = CM_CONFIG.objects.all()
+    result = serializers.serialize("json", pub_list)
+    context_dict = {'publist': result}
+    return render(request, 'cmdb/config.html', context_dict)
+
+
+'''
+    删除
+    页面config.xml
+    参数：id
+    返回 页面config.xml
+'''
+
+
+# server_remove
+def remove_config(request):
+    r_id = request.GET["id"]
+    result = CM_CONFIG.objects.get(id=r_id)
+    result.delete()
+    return HttpResponse("success")
+
+
+'''
+    编辑
+    页面：config.html
+    参数id
+    页面：edit_config.html
+    参数：form
+    返回页面  edit_config.html
+'''
+
+
+# 获取当前行信息
+def get_edit_config(request):
+    r_id = request.GET["id"]
+    result = CM_CONFIG.objects.get(id=r_id)
+    form = ConfigForm(instance=result)
+    return render(request, 'cmdb/edit_config.html', {'form': form})
+
+
+# update
+def edit_config(request):
+    if request.method == 'POST':
+        r_id = request.POST["id"]
+        pub_info = CM_CONFIG.objects.get(id=r_id)  # 获取要更改行
+        form = ConfigForm(request.POST, instance=pub_info)
+        if form.is_valid():
+            form.save()
+            return config(request)
+        else:
+            print form.errors
+    else:
+        form = ConfigForm()
+    return render(request, 'cmdb/add_pub.html', {'form': form})
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 def index(request):
