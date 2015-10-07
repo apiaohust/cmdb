@@ -9,13 +9,12 @@ from cmdb.models import CM_SERVER, CM_OS, CM_DATABASE, CM_MIDWARE, CM_APP, CM_VC
 
 class OSForm(forms.ModelForm):
     id = forms.IntegerField(widget=forms.HiddenInput, initial=0)
-    #server = forms.IntegerField(label="关联服务器")
     number = forms.CharField(max_length=50, label="编号", help_text="input number")
     type = forms.CharField(max_length=50, label="类型", help_text="input type")
     version = forms.CharField(max_length=50, label="版本", help_text="input version")
     create_time = forms.DateField(widget=SelectDateWidget(years=range(1990, 2050, 1), ), label="安装时间")
-    disk_content = forms.IntegerField(label="磁盘空间")
-    memory = forms.IntegerField(label="内存")
+    disk_content = forms.IntegerField()
+    memory = forms.IntegerField()
 
     class Meta:
         model = CM_OS
@@ -25,29 +24,29 @@ class OSForm(forms.ModelForm):
 class ServerForm(forms.ModelForm):
     id = forms.IntegerField(widget=forms.HiddenInput, initial=0)
     hardware_num = forms.CharField(max_length=50, required=False, label="硬件编号")
-    architecture = forms.CharField(max_length=50, required=False,label="架构类型")
-    version = forms.CharField(max_length=50, required=False,label="版本")
-    cpu_count = forms.IntegerField(required=False,label="cpu数量")
-    memory = forms.IntegerField(required=False,label="内存大小")
-    detail = forms.CharField(max_length=700, required=False,label="详情")
-    fun_name = forms.CharField(max_length=100, required=False,label="功能名称")
-    admin_ip = forms.CharField(max_length=100, required=False,label="管理ip")
-    server_ip = forms.CharField(max_length=100, required=False,label="服务ip")
-    net_local = forms.CharField(max_length=50, required=False,label="网络位置")
-    vcluster = forms.IntegerField(required=False,label="所属集群")
-    m_room = forms.CharField(max_length=70, required=False,label="机房位置")
-    m_cabinet = forms.CharField(max_length=50, required=False,label="机柜")
-    m_cabloc = forms.CharField(max_length=50, required=False,label="机柜位")
-    buy_time = forms.DateField(widget=SelectDateWidget(years=range(1990, 2050, 1), ), label="入库时间")
+    architecture = forms.CharField(max_length=50, required=False)
+    version = forms.CharField(max_length=50, required=False)
+    cpu_count = forms.IntegerField(required=False)
+    memory = forms.IntegerField(required=False)
+    detail = forms.CharField(max_length=700, required=False)
+    fun_name = forms.CharField(max_length=100, required=False)
+    admin_ip = forms.CharField(max_length=100, required=False)
+    server_ip = forms.CharField(max_length=100, required=False)
+    net_local = forms.CharField(max_length=50, required=False)
+    vcluster = forms.IntegerField(required=False)
+    m_room = forms.CharField(max_length=70, required=False)
+    m_cabinet = forms.CharField(max_length=50, required=False)
+    m_cabloc = forms.CharField(max_length=50, required=False)
+    buy_time = forms.DateField(widget=SelectDateWidget(years=range(1990, 2050, 1), ), label="安装时间")
     set_time = forms.DateField(widget=SelectDateWidget(years=range(1990, 2050, 1), ), label="安装时间")
-    monitor = forms.CharField(max_length=100, required=False,label="监控名称")
-    datebase = forms.IntegerField(required=False,label="数据库")
+    monitor = forms.CharField(max_length=100, required=False)
+    datebase = forms.IntegerField(required=False)
     # TODO
-    midleware = forms.IntegerField(required=False,label="中间件")
-    HA = forms.CharField(max_length=50, required=False,label="高可用类型")
-    status = forms.CharField(max_length=50, required=False,label="服务器状态")
-    ex_store = forms.CharField(max_length=50, required=False,label="外连存储")
-    ex_miya = forms.CharField(max_length=50, required=False,label="外连密押")
+    midleware = forms.IntegerField(required=False)
+    HA = forms.CharField(max_length=50, required=False)
+    status = forms.CharField(max_length=50, required=False)
+    ex_store = forms.CharField(max_length=50, required=False)
+    ex_miya = forms.CharField(max_length=50, required=False)
 
     class Meta:
         model = CM_SERVER
@@ -129,6 +128,17 @@ class UserForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ('username', 'email', 'password')
+
+
+# class UserGroupForm (forms.ModelForm):
+
+class UserProfileForm(forms.ModelForm):
+    id = forms.IntegerField(widget=forms.HiddenInput, initial=0)
+    permission = forms.CharField(max_length=50)
+
+    class Meta:
+        model = USER_PROFILE
+        fields ={'permission'}
 
 
 class ConfigForm(forms.ModelForm):

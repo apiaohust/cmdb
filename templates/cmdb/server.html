@@ -61,6 +61,27 @@
             window.location.href=edit_url;
         }
 	},'-',{
+		iconCls: 'icon-edit',
+        text:'自动更新',
+		handler: function(){
+            var row = $('#server_list').datagrid('getSelected');
+            var id = row.id;
+            $.ajax( {
+                type : "get",
+                url : "/cmdb/upserver/",
+                data : {"id":id},
+                timeout : 20000,
+                cache : false,
+                success : function(data) {
+                    if(data="success")
+                       alert("update success");
+                    else
+                       alert("update failed")
+                    $('#server_list').datagrid("reload")
+                    }
+            });
+        }
+	},'-',{
 		iconCls: 'icon-remove',
         text:'删除',
 		handler: function(){

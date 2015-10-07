@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 ## 服务器
 class CM_SERVER(models.Model):
     id = models.AutoField(primary_key=True)  # 自增id
+    pub_platform = models.ForeignKey('CM_PUBPLATFORM')  # 外键关联公共平台 n:1
     hardware_num = models.CharField(max_length=50, blank=True)  # 硬件编号
     architecture = models.CharField(max_length=50, blank=True)  # 架构类型
     version = models.CharField(max_length=50, blank=True)  # 版本
@@ -46,6 +47,9 @@ class CM_OS(models.Model):
     create_time = models.DateField()  # 安装时间
     disk_content = models.IntegerField()  # 磁盘空间
     memory = models.IntegerField()  # 内存
+
+    def __unicode__(self):
+        return self.id
 
 
 ##应用系统
@@ -153,6 +157,10 @@ class CM_DATABASE(models.Model):
 
     def __unicode__(self):
         return self.solf_num
+
+class USER_PROFILE(models.Model):
+    id = models.AutoField(primary_key=True)
+    permission = ( ('read','read'), ('modify','modify'))
 
 class CM_REL_SERVER_MIDWARE(models.Model):
     id = models.AutoField(primary_key=True) #自增主键
